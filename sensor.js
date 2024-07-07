@@ -1,9 +1,9 @@
 class Sensor {
   constructor(car) {
     this.car = car;
-    this.rayCount = 20;
+    this.rayCount = 5;
     this.rayLength = 150;
-    this.raySpread = Math.PI * 2;
+    this.raySpread = Math.PI / 4;
 
     this.rays = [];
   }
@@ -50,7 +50,7 @@ class Sensor {
     }
   }
 
-  update(borders) {
-    this.#castRays(borders);
+  update(borders, traffic) {
+    this.#castRays([...borders, ...traffic.map((t) => t.borders).flat()]);
   }
 }
